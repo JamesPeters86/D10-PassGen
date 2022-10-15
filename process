@@ -1,0 +1,25 @@
+#### Objective ####
+Produce a readily verifiable dice-based phonetic password generator.
+I wanted to make a password gnerator that used a completly trustworthy random number generator - dice.
+I wanted the program and the list to be easily verified by even the most novice programers. 
+The two relavent scripts total less than 100 lines of code, and are very straightforward. 
+Verifying that all tokens on the list are 2 or 3 digits can easily be done with stats scripts
+Verifying the uniqueness of every entry can be done by comparing the output of wc with sort -u | wc
+
+#### generation process ####
+1) generate phonetic tokens from tokenGen.py
+2) merge phonetic list with word list
+3) break up list into 2 digit and 3 digit
+4) trim the two digit list by removing unpronancalbe ones
+5) merge the 2 digit and 3 digit lists
+6) add a few missing ones that I didn't think of to fill in
+
+#### Analysis and Thought Process ####
+run stats.py on phonetic and word lists indiv. and combned.
+Calculate bits of entory per digit =ln(unique tokens)/(token length * ln(2))
+Use basis 200 Gig-attempts per second based on 5k machine 
+Entropy per digit drops very rapidly, but unique tokens increases rapidly
+For each length calculate combinations and hash time for smallest password >= 20 digits long
+	e.g. 3 tokens for 7 digit. 
+The small number of tokens grossly outweighed the increased combinations for similarly lengthed passwords.
+7 digit tokens 
